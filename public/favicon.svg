@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Memory Thief">
+  <rect width="64" height="64" rx="14" fill="#0d1526"/>
+  <circle cx="28" cy="27" r="13" fill="none" stroke="#f5a524" stroke-width="5"/>
+  <path d="M37.5 36.5 L50 49" stroke="#f5a524" stroke-width="6" stroke-linecap="round"/>
+  <path d="M19 25 h18" stroke="#eef3fb" stroke-width="5" stroke-linecap="round"/>
+  <circle cx="23.5" cy="31" r="3.2" fill="#eef3fb"/>
+  <circle cx="32.5" cy="31" r="3.2" fill="#eef3fb"/>
+</svg>

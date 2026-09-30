@@ -1,0 +1,314 @@
+@import 'tailwindcss';
+
+/*
+  Memory Thief design tokens.
+  Detective theme: dark navy surfaces, amber accent, rounded cards.
+  Light mode is a genuine light theme (not a washed-out dark one), and every
+  token below is redefined for it so component classes never branch on theme.
+*/
+:root {
+  color-scheme: dark;
+
+  --c-bg: #080d1a;
+  --c-bg-2: #0d1526;
+  --c-surface: #141e33;
+  --c-surface-2: #1b2842;
+  --c-border: #27344f;
+  --c-border-strong: #3a4a6b;
+
+  --c-text: #eef3fb;
+  --c-text-muted: #9dabc4;
+  --c-text-faint: #6f7f9c;
+
+  --c-accent: #f5a524;
+  --c-accent-soft: #b9791a;
+  --c-on-accent: #1a1204;
+
+  --c-success: #35c98a;
+  --c-warn: #f59f4a;
+  --c-danger: #f05a5a;
+  --c-info: #5aa9f0;
+
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.4), 0 10px 30px -12px rgb(0 0 0 / 0.65);
+  --shadow-lift: 0 2px 4px rgb(0 0 0 / 0.35), 0 18px 40px -16px rgb(0 0 0 / 0.7);
+  --radius-card: 18px;
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+
+  --c-bg: #eef1f7;
+  --c-bg-2: #e4e9f2;
+  --c-surface: #ffffff;
+  --c-surface-2: #f4f6fb;
+  --c-border: #d7dde9;
+  --c-border-strong: #b6c0d2;
+
+  --c-text: #131c2e;
+  --c-text-muted: #4e5c76;
+  --c-text-faint: #6d7c96;
+
+  --c-accent: #b45309;
+  --c-accent-soft: #e8a33d;
+  --c-on-accent: #ffffff;
+
+  --c-success: #128456;
+  --c-warn: #a2540b;
+  --c-danger: #c22e2e;
+  --c-info: #1c64ac;
+
+  --shadow-card: 0 1px 2px rgb(19 28 46 / 0.06), 0 10px 28px -14px rgb(19 28 46 / 0.3);
+  --shadow-lift: 0 2px 6px rgb(19 28 46 / 0.08), 0 20px 44px -18px rgb(19 28 46 / 0.35);
+}
+
+/* Map the tokens into Tailwind's palette so utilities like bg-surface work. */
+@theme inline {
+  --color-bg: var(--c-bg);
+  --color-bg-2: var(--c-bg-2);
+  --color-surface: var(--c-surface);
+  --color-surface-2: var(--c-surface-2);
+  --color-line: var(--c-border);
+  --color-line-strong: var(--c-border-strong);
+  --color-ink: var(--c-text);
+  --color-muted: var(--c-text-muted);
+  --color-faint: var(--c-text-faint);
+  --color-accent: var(--c-accent);
+  --color-accent-soft: var(--c-accent-soft);
+  --color-on-accent: var(--c-on-accent);
+  --color-success: var(--c-success);
+  --color-warn: var(--c-warn);
+  --color-danger: var(--c-danger);
+  --color-info: var(--c-info);
+
+  --font-display: 'Space Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--c-bg);
+  color: var(--c-text);
+  font-family: var(--font-sans);
+  font-synthesis-weight: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  /* Radial wash keeps large dark areas from looking flat. */
+  background-image:
+    radial-gradient(1100px 620px at 12% -12%, color-mix(in oklab, var(--c-accent) 11%, transparent), transparent 62%),
+    radial-gradient(900px 560px at 92% 0%, color-mix(in oklab, var(--c-info) 12%, transparent), transparent 60%);
+  background-attachment: fixed;
+  overscroll-behavior-y: none;
+}
+
+h1,
+h2,
+h3,
+.font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+/* One visible, consistent focus ring everywhere — never removed. */
+:focus-visible {
+  outline: 3px solid var(--c-accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* ---------- Component primitives ---------- */
+
+.card {
+  background: var(--c-surface);
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  padding: 0.625rem 1.15rem;
+  border-radius: 12px;
+  border: 1px solid var(--c-border-strong);
+  background: var(--c-surface-2);
+  color: var(--c-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease,
+    box-shadow 180ms ease, color 180ms ease;
+}
+
+.btn:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--c-surface-2) 82%, var(--c-accent));
+  border-color: var(--c-accent-soft);
+  transform: translateY(-1px);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-primary {
+  background: var(--c-accent);
+  border-color: var(--c-accent);
+  color: var(--c-on-accent);
+  box-shadow: 0 8px 22px -12px color-mix(in oklab, var(--c-accent) 85%, transparent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--c-accent) 88%, white);
+  border-color: color-mix(in oklab, var(--c-accent) 88%, white);
+  color: var(--c-on-accent);
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: var(--c-border);
+  color: var(--c-text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--c-text);
+  background: var(--c-surface-2);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 999px;
+  background: var(--c-surface-2);
+  border: 1px solid var(--c-border);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--c-text-muted);
+  white-space: nowrap;
+}
+
+/* ---------- Motion ---------- */
+
+@keyframes mt-fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mt-fade {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes mt-pop {
+  0% { transform: scale(0.82); opacity: 0; }
+  60% { transform: scale(1.04); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+/* Expanding confirmation ring. Scaled (not r-animated) so it works everywhere;
+   transform-origin defaults to the parent <g>'s origin, i.e. the tap point. */
+@keyframes mt-ring {
+  0% { transform: scale(0.3); opacity: 0.95; }
+  100% { transform: scale(4.4); opacity: 0; }
+}
+
+.mt-ring { animation: mt-ring 620ms cubic-bezier(0.16, 1, 0.3, 1) forwards; }
+
+/* A wrong guess pops, then fades back so it marks the spot without competing
+   with the scene for attention. */
+@keyframes mt-miss {
+  0% { transform: scale(0.4); opacity: 0; }
+  45% { transform: scale(1.15); opacity: 1; }
+  70% { transform: scale(1); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.4; }
+}
+
+.mt-miss { animation: mt-miss 900ms cubic-bezier(0.34, 1.4, 0.64, 1) forwards; }
+
+@keyframes mt-shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-6px); }
+  40% { transform: translateX(6px); }
+  60% { transform: translateX(-4px); }
+  80% { transform: translateX(3px); }
+}
+
+@keyframes mt-toast-in {
+  from { opacity: 0; transform: translateY(-14px) scale(0.96); }
+  to { opacity: 1; transform: none; }
+}
+
+@keyframes mt-scan {
+  from { transform: translateY(-110%); }
+  to { transform: translateY(410%); }
+}
+
+.anim-fade-up { animation: mt-fade-up 320ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.anim-fade { animation: mt-fade 240ms ease both; }
+.anim-pop { animation: mt-pop 260ms cubic-bezier(0.34, 1.56, 0.64, 1) both; }
+.anim-shake { animation: mt-shake 340ms ease; }
+.anim-toast { animation: mt-toast-in 300ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+/*
+  Reduced motion: honoured both from the OS and from the in-game setting
+  (which sets data-motion="reduced" on <html>).
+*/
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion='full']) *,
+  :root:not([data-motion='full']) *::before,
+  :root:not([data-motion='full']) *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+:root[data-motion='reduced'] *,
+:root[data-motion='reduced'] *::before,
+:root[data-motion='reduced'] *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+/* The find-phase scene must never scroll under a tap. */
+.scene-surface {
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Thin scrollbars inside cards so long lists don't get a chunky native bar. */
+.scroll-slim {
+  scrollbar-width: thin;
+  scrollbar-color: var(--c-border-strong) transparent;
+}
+
+.scroll-slim::-webkit-scrollbar { width: 8px; height: 8px; }
+.scroll-slim::-webkit-scrollbar-thumb {
+  background: var(--c-border-strong);
+  border-radius: 999px;
+}

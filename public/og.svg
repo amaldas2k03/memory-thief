@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#080d1a"/>
+      <stop offset="1" stop-color="#16233c"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <circle cx="1010" cy="140" r="230" fill="#f5a524" opacity="0.10"/>
+  <circle cx="150" cy="560" r="190" fill="#5aa9f0" opacity="0.10"/>
+  <g transform="translate(96 210)">
+    <circle cx="58" cy="52" r="42" fill="none" stroke="#f5a524" stroke-width="13"/>
+    <path d="M89 83 L128 122" stroke="#f5a524" stroke-width="16" stroke-linecap="round"/>
+    <path d="M30 46 h56" stroke="#eef3fb" stroke-width="13" stroke-linecap="round"/>
+    <circle cx="44" cy="64" r="9" fill="#eef3fb"/>
+    <circle cx="72" cy="64" r="9" fill="#eef3fb"/>
+  </g>
+  <text x="96" y="420" font-family="Space Grotesk, Segoe UI, sans-serif" font-size="94" font-weight="700" fill="#eef3fb">Memory Thief</text>
+  <text x="96" y="486" font-family="Inter, Segoe UI, sans-serif" font-size="36" fill="#9dabc4">Memorise the scene. Find what the thief changed.</text>
+  <text x="96" y="552" font-family="Inter, Segoe UI, sans-serif" font-size="28" font-weight="600" fill="#f5a524">Daily challenge &#183; 4 themed scenes &#183; free in your browser</text>
+</svg>
